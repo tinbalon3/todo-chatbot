@@ -43,9 +43,15 @@ public class TodoService {
         
         Todo todo = new Todo();
         todo.setTitle(suggestion);
-        setDefaultValues(todo);
         
-        logger.info("AI đã tạo công việc: {}", suggestion);
+        // Thiết lập thời gian tự động
+        LocalDateTime now = LocalDateTime.now();
+        todo.setCreatedAt(now);
+        todo.setUpdatedAt(now);
+        todo.setDueDate(now.plusDays(1)); // Mặc định hạn là 1 ngày từ khi tạo
+        todo.setCompleted(false);
+        
+        logger.info("AI đã tạo công việc: {} với thời hạn: {}", suggestion, todo.getDueDate());
         return todoRepository.save(todo);
     }
 

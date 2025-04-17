@@ -76,11 +76,27 @@ Content-Type: application/json
 ```http
 POST /api/todos/generate
 Content-Type: application/json
+Parameter: prompt (string)
 
+Ví dụ:
+/api/todos/generate?prompt=Tạo một task về việc học Spring Boot
+
+Response:
 {
-    "prompt": "Tạo một task về việc học Spring Boot"
+    "id": 1,
+    "title": "Học Spring Boot cơ bản và nâng cao",
+    "description": null,
+    "dueDate": "2024-04-18T14:32:40", // Tự động thiết lập là 1 ngày từ thời điểm tạo
+    "completed": false,
+    "createdAt": "2024-04-17T14:32:40",
+    "updatedAt": "2024-04-17T14:32:40"
 }
 ```
+
+Lưu ý: Khi tạo task bằng AI:
+- Thời gian tạo (createdAt) và cập nhật (updatedAt) sẽ được tự động thiết lập
+- Thời hạn (dueDate) mặc định là 1 ngày từ khi tạo
+- Task mặc định ở trạng thái chưa hoàn thành (completed = false)
 
 #### Cập nhật task
 ```http
